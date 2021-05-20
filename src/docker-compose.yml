@@ -3,12 +3,27 @@ version: '3.4'
 services:
   catalogdb:
     image: mongo
+
+  cartdb:
+    image: redis:alpine
+
+  portainer:
+    image: portainer/portainer-ce
+
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.Api/Dockerfile
 
+  cart.api:
+    image: ${DOCKER_REGISTRY-}cartapi
+    build:
+      context: .
+      dockerfile: Services/Cart/Cart.Api/Dockerfile
+
 volumes:
   mongo_data:
+  portainer_data:
     
+
