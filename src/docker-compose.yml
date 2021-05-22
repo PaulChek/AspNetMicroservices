@@ -6,6 +6,9 @@ services:
 
   cartdb:
     image: redis:alpine
+  
+  discountdb:
+    image: postgres
 
   portainer:
     image: portainer/portainer-ce
@@ -22,8 +25,16 @@ services:
       context: .
       dockerfile: Services/Cart/Cart.Api/Dockerfile
 
+  discount.api:
+    image: ${DOCKER_REGISTRY-}discountapi
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.Api/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
+  pg_data:
     
+
 
