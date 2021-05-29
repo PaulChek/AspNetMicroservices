@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "Discount.gRPC";
+
+package coupon;
+
+service DiscountService{
+	rpc Get(Request) returns (Response);
+	rpc Create(Coupon) returns (ResponseBool);
+	rpc Delete(Request) returns (ResponseBool);
+}
+message Request{
+	string product_name = 1;
+}
+message Response{
+	Coupon coupon = 1;
+}
+
+message Coupon{
+    int32 Id = 1;
+    string ProductName = 2;
+    string Description = 3;
+    int32 Amount = 4;
+}
+message ResponseBool{
+	bool success = 1;
+}

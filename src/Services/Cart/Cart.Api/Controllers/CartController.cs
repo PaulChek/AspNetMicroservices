@@ -1,9 +1,6 @@
 ﻿using Cart.Api.Model;
 using Cart.Api.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,16 +9,30 @@ namespace Cart.Api.Controllers {
     [Route("[controller]")]
     public class CartController : ControllerBase {
         private readonly IRepository _repo;
+        private readonly GetCouponClient _grpcClient;
 
-        public CartController(IRepository repo) {
+        public CartController(IRepository repo, GetCouponClient grpcClient) {
             _repo = repo;
+            _grpcClient = grpcClient;
         }
 
         [HttpGet("{userId}")]
         public async Task<ActionResult<ShoppingCart>> Get(string userId) {
             var cart = await _repo.Get(userId);
-            return Ok(cart ?? new ShoppingCart(userId));
+            //grpc client add here
+            foreach (var item in cart.Items) {
+                var coupon = await _grpcClient.GetCouponAsync(item.Name);
+                System.Console.WriteLine("Coupon:->" + coupon.Amount);
+                item.Price -= coupon.Amount * item.Quantity;
+            }
+           
+            var newCart = new ShoppingCart(userId) {
+                Items = cart.Items
+            };
+
+            return Ok(newCart);
         }
+
         [HttpPut]
         public async Task<ActionResult<ShoppingCart>> Update(ShoppingCart cart) {
             var updCart = await _repo.Update(cart);

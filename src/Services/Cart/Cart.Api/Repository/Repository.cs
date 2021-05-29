@@ -13,7 +13,7 @@ namespace Cart.Api.Repository {
         public async Task<ShoppingCart> Get(string UserId) {
             var cartString = await _redisCache.GetStringAsync(UserId);
             if (string.IsNullOrEmpty(cartString))
-                return null;
+                return new ShoppingCart();
             var cart = JsonSerializer.Deserialize<ShoppingCart>(cartString);
             return cart;
         }
