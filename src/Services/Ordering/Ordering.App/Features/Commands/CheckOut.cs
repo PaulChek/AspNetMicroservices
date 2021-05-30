@@ -4,8 +4,6 @@ using Ordering.App.Contracts.Persistence;
 using Ordering.App.Model;
 using Ordering.Domain.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,9 +16,9 @@ namespace Ordering.App.Features.Commands {
         public record Response(int res);
 
         public class Handler : IRequestHandler<Command, Response> {
-            
+
             private readonly IOrderRepository _repo;
-            
+
             private readonly IEmailService _email;
 
             public Handler(IOrderRepository repo, IEmailService email) {

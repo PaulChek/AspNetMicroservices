@@ -13,7 +13,7 @@ namespace Ordering.App.Contracts.Persistence {
         Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy,
             List<Expression<Func<T, object>>> includes,
-            string inclideString, bool disableTracking = true);
+            string includeString, bool disableTracking = true);
 
         Task<T> GetAsync(int Id);
         Task<T> AddAsync(T model);

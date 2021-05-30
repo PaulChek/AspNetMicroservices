@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 
 namespace Ordering.App.Features.Queries {
     public static class GetOrdersList {
-
         public record Query(string userName) : IRequest<Response>;
-
+        
         public record Response(IReadOnlyList<Order> orders);
         public class Handler : IRequestHandler<Query, Response> {
 

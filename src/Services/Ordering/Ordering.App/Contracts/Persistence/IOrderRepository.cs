@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace Ordering.App.Contracts.Persistence {
     public interface IOrderRepository : IAsyncRepository<Order> {
-        Task<IReadOnlyList<Order>> GetAsync(string userName);
+        Task<IReadOnlyList<Order>> GetAsync(string userId);
     }
 }

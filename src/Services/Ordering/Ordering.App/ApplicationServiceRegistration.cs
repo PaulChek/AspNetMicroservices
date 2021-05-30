@@ -7,7 +7,6 @@ namespace Ordering.App {
     public static class ApplicationServiceRegistration {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services) {
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            //services.AddScoped<IOrderRepository>();
             return services;
         }
     }

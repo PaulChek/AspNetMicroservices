@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Ordering.App;
+using Ordering.infrastructure;
+using Ordering.infrastructure.Persistence;
 
 namespace Ordering.Api {
     public class Startup {
@@ -15,7 +19,9 @@ namespace Ordering.Api {
 
         public void ConfigureServices(IServiceCollection services) {
 
-       
+            services.AddApplicationServices();
+
+            services.AddInfrastractureService(Configuration);
 
             services.AddControllers();
             services.AddSwaggerGen(c => {
@@ -31,7 +37,7 @@ namespace Ordering.Api {
             }
 
             app.UseRouting();
-
+       
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {
