@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Features.Orders;
+using AutoMapper;
+using Domain.Model;
 
 namespace Application.Mappings {
     public class MappingProfile : Profile {
+        public MappingProfile() {
+            CreateMap<Order, OrderVm>().ReverseMap();
+        }
     }
 }
