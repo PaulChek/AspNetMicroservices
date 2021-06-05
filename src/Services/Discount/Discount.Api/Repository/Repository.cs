@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using Dapper;
-using System;
 using System.Threading.Tasks;
 
 namespace Discount.Api.Repository {

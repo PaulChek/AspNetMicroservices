@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace Catalog.Api.Repository {
     public class Repository<T> : IRepository<T> where T : IEntity {
+        
         private readonly IMongoCollection<T> _dbContext;
+        
         private readonly FilterDefinitionBuilder<T> _filterBuilder = Builders<T>.Filter;
 
         public Repository(MongoDbContext<T> dbContext) {
             _dbContext = dbContext.GetType().GetProperty("Collection").GetValue(dbContext) as IMongoCollection<T>;
-
-
-
-
         }
-
-
 
 
         public Task<T> GetAsync(string id) {
