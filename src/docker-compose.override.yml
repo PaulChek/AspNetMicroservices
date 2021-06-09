@@ -47,8 +47,15 @@ services:
      - /var/run/docker.sock:/var/run/docker.sock
      - portainer_data:/data
 
+  rabbit.mq:
+    container_name: rabbit.mq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   catalog.api:
-    container_name: catalog_api
+    container_name: catalog.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "MongoDbSettings:ConnectionString=mongodb://catalogdb:27017"
@@ -58,7 +65,7 @@ services:
       - "8000:80"
 
   cart.api:
-    container_name: cart_api
+    container_name: cart.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "Redis:Uri=cartdb:6379"
@@ -70,7 +77,7 @@ services:
 
 
   discount.api:
-    container_name: discount_api
+    container_name: discount.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "PostgerServer=Server=discountdb;Port=5432;Database=Discounts;User Id=admin;Password=admin1234"
@@ -95,7 +102,7 @@ services:
     container_name: ordering.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:Sql=Data Source=order_db; Initial Catalog=Orders;User Id=sa; Password=Suckmydick123456@"
+      - "ConnectionStrings:SqlOrders=Data Source=orderdb;Initial Catalog=Orders;User Id=sa;Password=Suckmydick123456@"
     depends_on:
       - orderdb
     ports:

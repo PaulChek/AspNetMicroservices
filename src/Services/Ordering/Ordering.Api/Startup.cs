@@ -1,4 +1,5 @@
 using Application;
+using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,9 @@ namespace Ordering.Api {
 
         public void ConfigureServices(IServiceCollection services) {
 
-            services.AddApplicationServices();
+            services
+                .AddApplicationServices()
+                .AddIfrastructureServices(Configuration);
 
             services.AddControllers();
             services.AddSwaggerGen(c => {

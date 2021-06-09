@@ -1,16 +1,12 @@
 using Cart.Api.Repository;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cart.Api {
     public class Startup {
@@ -22,13 +18,22 @@ namespace Cart.Api {
 
         public void ConfigureServices(IServiceCollection services) {
 
+            //Mass-Transit
+            services.AddMassTransit(configure => configure.UsingRabbitMq((ctx, cfg) => {
+                cfg.Host(Configuration["RabbitMQ:Host"]);
+            }));
+            services.AddMassTransitHostedService();
+
+            //grpc
             services.AddGrpcClient<Discount.gRPC.DiscountService.DiscountServiceClient>(op => {
                 op.Address = new Uri(Configuration.GetValue<string>("DiscountServiceUri"));
             });
+
             services.AddScoped<GetCouponClient>();
 
             services.AddSingleton<IRepository, Repository.Repository>();
 
+            //redis
             services.AddStackExchangeRedisCache(op => {
                 op.Configuration = Configuration.GetValue<string>("Redis:Uri");
             });
