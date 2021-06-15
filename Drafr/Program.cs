@@ -1,32 +1,23 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-//'Hello world' = true
-//' Hello world' = false
-//'Hello world  ' = false
-//'Hello  world' = false
-//'Hello' = true
-//// Even though there are no spaces, it is still valid because none are needed
-//'Helloworld' = true
-//// true because we are not checking for the validity of words.
-//'Helloworld ' = false
-//' ' = false
-//'' = true
+//Heron 's formula:
+//sqrt (s * (s - a) * (s - b) * (s - c)),
+//where s = (a + b + c) / 2.
+//Output should have 2 digits precision.
 
 namespace Drafr {
 
     class Program {
+
         static void Main(string[] args) {
-            var tree = new Tree();
-            foreach (int item in Generate(6))
-                tree.Add(item);
+        }
+        static long SummNum(long n) =>
+             (n + "").ToCharArray().Aggregate(0L, (a, c) => a + long.Parse(c + ""));
 
-            tree.ShowInOrder();
-
+        public static double heron(double a, double b, double c) {
+            double s = (a + b + c) / 2;
+            return double.Parse(Math.Sqrt(s * (s - a) * (s - b) * (s - c)).ToString("F2"));
         }
         static IEnumerable<int> Generate(int number) {
             var rnd = new Random();

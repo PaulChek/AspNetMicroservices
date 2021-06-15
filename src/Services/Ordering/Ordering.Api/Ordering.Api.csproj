@@ -8,6 +8,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="MassTransit" Version="7.2.0" />
+		<PackageReference Include="MassTransit.AspNetCore" Version="7.2.0" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="7.2.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
@@ -17,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common\EvenetBus.Messges\EvenetBus.Messges.csproj" />
 		<ProjectReference Include="..\Application\Application.csproj" />
 		<ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
 	</ItemGroup>

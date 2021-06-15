@@ -23,19 +23,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discount.gRPC", "Services\D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{CF76F1FD-8FD8-41B3-B90F-4542267DE1CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Api", "Services\Ordering\Ordering.Api\Ordering.Api.csproj", "{20FA2B70-9DA3-4161-9853-0FA0A6C33B2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.Api", "Services\Ordering\Ordering.Api\Ordering.Api.csproj", "{20FA2B70-9DA3-4161-9853-0FA0A6C33B2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Services\Ordering\Application\Application.csproj", "{CB15D035-D812-44B0-8DDD-2F056C04C068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Ordering\Application\Application.csproj", "{CB15D035-D812-44B0-8DDD-2F056C04C068}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Services\Ordering\Domain\Domain.csproj", "{1CD92DB1-F9D5-4E3E-8662-950D9AEBE8B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Services\Ordering\Domain\Domain.csproj", "{1CD92DB1-F9D5-4E3E-8662-950D9AEBE8B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Services\Ordering\Infrastructure\Infrastructure.csproj", "{21D6E046-8C4F-4415-89F2-5339AB63C587}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Services\Ordering\Infrastructure\Infrastructure.csproj", "{21D6E046-8C4F-4415-89F2-5339AB63C587}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drafr", "..\Drafr\Drafr.csproj", "{13E7C8A1-A115-456D-B678-07C7B8218B5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drafr", "..\Drafr\Drafr.csproj", "{13E7C8A1-A115-456D-B678-07C7B8218B5C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D11BB301-2EAA-4114-9BAA-BA7F659BB759}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvenetBus.Messges", "Common\EvenetBus.Messges\EvenetBus.Messges.csproj", "{64AD55D0-6318-4487-BE46-03EE10BA0546}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvenetBus.Messges", "Common\EvenetBus.Messges\EvenetBus.Messges.csproj", "{64AD55D0-6318-4487-BE46-03EE10BA0546}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateWays", "ApiGateWays", "{AA8CF6BD-335E-4E4C-B0C3-A5A3EB811369}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGw", "ApiGateWays\OcelotApiGw\OcelotApiGw.csproj", "{DB8994D8-F5E0-49CC-A40B-7B334C706968}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,10 @@ Global
 		{64AD55D0-6318-4487-BE46-03EE10BA0546}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64AD55D0-6318-4487-BE46-03EE10BA0546}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64AD55D0-6318-4487-BE46-03EE10BA0546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB8994D8-F5E0-49CC-A40B-7B334C706968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB8994D8-F5E0-49CC-A40B-7B334C706968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB8994D8-F5E0-49CC-A40B-7B334C706968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB8994D8-F5E0-49CC-A40B-7B334C706968}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +113,7 @@ Global
 		{1CD92DB1-F9D5-4E3E-8662-950D9AEBE8B2} = {CF76F1FD-8FD8-41B3-B90F-4542267DE1CE}
 		{21D6E046-8C4F-4415-89F2-5339AB63C587} = {CF76F1FD-8FD8-41B3-B90F-4542267DE1CE}
 		{64AD55D0-6318-4487-BE46-03EE10BA0546} = {D11BB301-2EAA-4114-9BAA-BA7F659BB759}
+		{DB8994D8-F5E0-49CC-A40B-7B334C706968} = {AA8CF6BD-335E-4E4C-B0C3-A5A3EB811369}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD293500-3D74-4B4C-B103-2B7C05AE1510}

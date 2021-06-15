@@ -9,6 +9,7 @@ WORKDIR /src
 COPY ["Services/Ordering/Ordering.Api/Ordering.Api.csproj", "Services/Ordering/Ordering.Api/"]
 COPY ["Services/Ordering/Application/Application.csproj", "Services/Ordering/Application/"]
 COPY ["Services/Ordering/Domain/Domain.csproj", "Services/Ordering/Domain/"]
+COPY ["Common/EvenetBus.Messges/EvenetBus.Messges.csproj", "Common/EvenetBus.Messges/"]
 COPY ["Services/Ordering/Infrastructure/Infrastructure.csproj", "Services/Ordering/Infrastructure/"]
 RUN dotnet restore "Services/Ordering/Ordering.Api/Ordering.Api.csproj"
 COPY . .

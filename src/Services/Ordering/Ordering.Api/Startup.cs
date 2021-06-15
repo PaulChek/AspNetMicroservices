@@ -1,17 +1,14 @@
 using Application;
+using EvenetBus.Messges.Events;
 using Infrastructure;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Ordering.Api.EventBusConsumers;
 
 namespace Ordering.Api {
     public class Startup {
@@ -26,6 +23,32 @@ namespace Ordering.Api {
             services
                 .AddApplicationServices()
                 .AddIfrastructureServices(Configuration);
+
+            //MassTransit Consumer
+            services.AddScoped<CartCheckOutEvent>();
+
+            services.AddMassTransit(configure => {
+
+                configure.AddConsumer<CartCheckOutConsumer>();
+
+                configure.UsingRabbitMq((context, config) => {
+                    config.Host(Configuration["RabbitMQ:Host"], "/", h => {
+                        h.Password(Configuration["RabbitMQ:Password"]);
+                        h.Username(Configuration["RabbitMQ:Login"]);
+                    });
+
+                    config.ReceiveEndpoint(EventBusContants.CartCheckOutQueue, c => {
+                        c.ConfigureConsumer<CartCheckOutConsumer>(context);
+                    });
+
+                });
+            });
+
+            services.AddMassTransitHostedService();
+            //end 
+
+            services.AddAutoMapper(typeof(Startup));
+
 
             services.AddControllers();
             services.AddSwaggerGen(c => {

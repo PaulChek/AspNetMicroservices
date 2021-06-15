@@ -20,7 +20,10 @@ namespace Cart.Api {
 
             //Mass-Transit
             services.AddMassTransit(configure => configure.UsingRabbitMq((ctx, cfg) => {
-                cfg.Host(Configuration["RabbitMQ:Host"]);
+                cfg.Host(Configuration["RabbitMQ:Host"], "/", h => {
+                    h.Password(Configuration["RabbitMQ:Password"]);
+                    h.Username(Configuration["RabbitMQ:Login"]);
+                });
             }));
             services.AddMassTransitHostedService();
 

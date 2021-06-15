@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace EvenetBus.Messges.Events {
-    public class CartCheckOutEvent : BaseEvent {
-
+namespace Cart.Api.Model {
+    public class CartCheckout {
+        //guid
         public string UserId { get; set; }
         public decimal TotalPrice { get; set; }
 
