@@ -1,0 +1,88 @@
+{
+  "Catalog": "http://localhost:8000/product",
+  "Cart": "http://localhost:8002/cart",
+  "Discount": "http://localhost:8003/cart",
+  "Ordering": "http://localhost:8004/order",
+  "Routes": [
+    //catalog
+    {
+      "DownstreamPathTemplate": "/product",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/product",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      //cache
+      "FileCacheOptions": {
+        "TtlSeconds": 15
+      },
+      //restrictions
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/product/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/product/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    //cart
+    {
+      "DownstreamPathTemplate": "/cart",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/cart",
+      "UpstreamHttpMethod": [ "Put", "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/cart/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cart.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/cart/{userId}",
+      "UpstreamHttpMethod": [ "Delete", "Get" ]
+    },
+    //order
+    {
+      "DownstreamPathTemplate": "/order/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/order/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5010"
+  }
+}

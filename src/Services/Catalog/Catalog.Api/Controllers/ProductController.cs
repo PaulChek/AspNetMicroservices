@@ -21,13 +21,13 @@ namespace Catalog.Api.Controllers {
         public async Task<List<Product>> Get() {
             return await _repo.GetAllAsync();
         }
-        [HttpGet("{id:length(24)}", Name = "GetOne")]
+        [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Product>> Get(string id) {
             return Ok(await _repo.GetAsync(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> Pos(Product p) {
+        public async Task<ActionResult<Product>> Post(Product p) {
 
             await _repo.AddAsync(p);
 
