@@ -2,22 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-//Heron 's formula:
-//sqrt (s * (s - a) * (s - b) * (s - c)),
-//where s = (a + b + c) / 2.
-//Output should have 2 digits precision.
-
+//"This is a test sentence."  ==>  "1a1c4e1h2i2n4s4t"
 namespace Drafr {
 
     class Program {
 
         static void Main(string[] args) {
-           var r = Solve("a(b(c))");
-            Console.WriteLine(r);
+            Loneliest("abc");
         }
-
-        private static string Solve(string s, string k="") => s == ( k = new Regex(@"\([^()]+\)").Replace(s, "")) ? s : Solve(k,k);
-           
-        
+        public static char[] Loneliest(string result) {
+            var dic = new Dictionary<char, int>();
+            var sp = 0; char cur = '\0';
+            foreach (var c in result) {
+                if (c == ' ') sp++;
+                if (Regex.IsMatch(c + "", "[a-z]")) {
+                    dic[c] = sp;
+                    if (cur != '\0') dic[cur] += sp;
+                    cur = c;
+                    sp = 0;
+                }
+            }
+            var max = dic.Max(v => v.Value);
+            var res = dic.Where(v => v.Value == max).Select(v => v.Key);
+            return res.ToArray();
+        }
     }
 }

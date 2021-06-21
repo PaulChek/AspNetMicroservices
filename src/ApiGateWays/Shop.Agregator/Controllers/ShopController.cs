@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Agregator.Model;
 using Shop.Agregator.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shop.Agregator.Controllers {
@@ -29,9 +25,13 @@ namespace Shop.Agregator.Controllers {
             var shop = new ShopModel();
             var cart = await _cartService.GetCartAsync(userId);
 
+
             foreach (var item in cart.Items) {
+
                 var product = await _catalogService.GetItemByIdAsync(item.Id);
-                var extItem = new ItemOfCartExtendedModel() { Quantity = item.Quantity, Category = product.Category, Description = product.Description, Id = item.Id, Img = item.Img, Name = product.Summary, Summary = product.Summary, Price = item.Price };
+
+                var extItem = new ItemOfCartExtendedModel() {  quantity = item.quantity, Category = product.Category, Description = product.Description, Id = item.Id, Img = product.Img, name = product.Summary, Summary = product.Summary, Price = item.Price };
+                shop.CartWithFullProducts = new CartModel(cart.UserId, cart.Total, new System.Collections.Generic.List<ItemOfCartExtendedModel>());
                 shop.CartWithFullProducts.Items.Add(extItem);
             }
 

@@ -1,4 +1,5 @@
-﻿using Shop.Agregator.Model;
+﻿using AspnetRunBasics.Models;
+using AspnetRunBasics.Services.Interfaces;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -13,7 +14,7 @@ namespace Shop.Agregator.Services {
             _client = client;
         }
         public async Task<List<OrderResponseModel>> GetOrdersAsync(string userId) {
-            return await _client.GetFromJsonAsync<List<OrderResponseModel>>($"/api/order/{userId}");
+            return await _client.GetFromJsonAsync<List<OrderResponseModel>>($"/order/{userId}");
         }
     }
 }
